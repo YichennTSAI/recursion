@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+int t;
+bool ans;
+
+int solve(){
+	int Wl, Dl, Wr, Dr;
+	cin>>Wl>>Dl>>Wr>>Dr;
+	// 先找出子秤子的重量
+	if(Wl == 0){
+		Wl = solve();
+	}
+	if(Wr == 0){
+		Wr = solve();
+	}
+	// 再判斷是否平衡
+	if(Wl*Dl != Wr*Dr){
+		ans = false;
+	}
+	// 將當前秤子的總重量回傳
+	return Wl + Wr;
+}
+
+int main(){
+	cin>>t;
+	for(int i=0 ; i<t ; i++){
+		ans = true;
+		if(i) cout<<"\n";
+		solve();
+		if(ans){
+			cout<<"YES\n";
+		}
+		else{
+			cout<<"NO\n";
+		}
+	}
+	return 0;
+}
