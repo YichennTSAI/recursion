@@ -1,0 +1,48 @@
+int main(){
+  string s, temp;
+  stack<string> stk;
+  bool correct = 1;
+  while( getline( cin, s ) ){
+    while( !stk.empty() ) stk.pop();
+    correct = 1;
+    for( int i = s.length()-1; i >= 0 ; i-- ){
+      if( s[i] <= 'z' && s[i] >= 'p' ){
+        temp = s[i];
+        stk.push(temp);
+      }
+      else if( s[i] == 'N' ){
+        if( stk.empty() ){
+          correct = 0;
+          break;
+        }
+        temp = stk.top();
+        stk.pop();
+        temp = s[i] + temp;
+        stk.push( temp );
+      }
+      else if( s[i] == 'C' || s[i] == 'D' || s[i] == 'E' || s[i] == 'I' ){
+        if( stk.empty() ){
+          correct = 0;
+          break;
+        }
+        temp = stk.top();
+        stk.pop();
+        if( stk.empty() ){
+          correct = 0;
+          break;
+        }
+        temp = stk.top() + temp;
+        stk.pop();
+        temp = s[i] + temp;
+        stk.push( temp );
+      }
+      else{
+        correct = 0;
+        break;
+      }
+    }
+    if( stk.size() != 1 ) correct = 0;
+    printf( ((correct)? "YES\n" : "NO\n" ) );
+  }
+  return 0;
+}
