@@ -1,0 +1,13 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+
+int main(){
+  int n;
+  int dp[80] = {0,1,2,2};
+  for( int i = 4 ; i <= 76 ; i++ )
+    dp[i] = dp[i-2] + dp[i-3];
+  while( scanf( "%d", &n ) != EOF )
+    printf( "%d\n", dp[n] );
+  return 0;
+}
